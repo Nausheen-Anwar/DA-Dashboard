@@ -27,7 +27,16 @@
   color: var(--ink);
   font-family: var(--font-body);
 }
-html, body, [class*="st-"], button, input, textarea, select { font-family: var(--font-body); }
+html, body, button, input, textarea, select { font-family: var(--font-body); }
+/* Apply body font to Streamlit text, but never to icon glyph elements */
+[class*="st-"]:not([data-testid="stIconMaterial"]):not([class*="material-icons"]):not([class*="material-symbols"]) { font-family: var(--font-body); }
+/* Keep Streamlit's icon font so ligatures render as icons, not words */
+[data-testid="stIconMaterial"],
+span[class*="material-icons"],
+span[class*="material-symbols"] {
+  font-family: "Material Symbols Rounded", "Material Symbols Outlined", "Material Icons" !important;
+  font-feature-settings: "liga" !important;
+}
 h1, h2, h3, h4, h5, h6, .ust-title { font-family: var(--font-heading) !important; }
 
 header[data-testid="stHeader"] {
@@ -302,4 +311,3 @@ div[data-testid="stVerticalBlockBorderWrapper"]:has(> div > div[data-testid="stV
 .st-key-ust_section_7 p,
 .st-key-ust_section_11 p,
 .st-key-ust_section_14 p { color: #65545A; }
-
